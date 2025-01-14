@@ -28,3 +28,9 @@ Your work will be graded based on the following criteria:
     - Teams placing 9th-10th will receive 1 point.
 
 **Le temps d'inférence ne doit pas dépasser 1h sur nos machines**
+
+## TODO
+- [] Utiliser ChatGPT pour augmenter les données de train et faire en sorte qu'elles soient classifiées
+- [] Faire un bon split train/test (pour l'instant, `X_test = X_train`)
+- [] Modifier le modèle
+- [] Faire une fonction de scoring (pour ne pas avoir à submit pour évaluer la performance du modèle)
