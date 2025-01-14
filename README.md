@@ -22,7 +22,7 @@ Your work will be graded based on the following criteria:
 
 - Kaggle Results (5 points)
     - The top two teams will receive 5 points.
-     -Teams placing 3rd-4th will receive 4 points.
+    - Teams placing 3rd-4th will receive 4 points.
     - Teams placing 5th-6th will receive 3 points.
     - Teams placing 7th-8th will receive 2 points.
     - Teams placing 9th-10th will receive 1 point.
