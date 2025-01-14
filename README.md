@@ -2,7 +2,7 @@
 
 ## Competition Link
 
-You can access the competition via the following link : [Kaggle](https://www.kaggle.com/competitions/nlp-cs-2024)
+You can access the competition via the following link : [Kaggle](https://www.kaggle.com/competitions/nlp-cs-2024-25)
 
 ## Report Link
 
