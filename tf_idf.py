@@ -15,7 +15,6 @@ from sklearn.utils import shuffle
 import numpy as np
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-print('ok')
 stop_words = stopwords.words('english')
 
 from sklearn.model_selection import train_test_split
