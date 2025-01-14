@@ -1,7 +1,9 @@
-# Paper Presentation Guidelines
+# NLP Kaggle Challenge
 
-Welcome to the Master Level Class Paper Presentation! Your presentation will be a pivotal part of your final grade, constituting 50% of it. To ensure you excel, here are the guidelines:
-ur presentation. Good luck!**
+## Competition Link
 
+You can access the competition via the following link : [Kaggle](https://www.kaggle.com/competitions/nlp-cs-2024)
 
-[https://www.kaggle.com/competitions/nlp-cs-2024](https://www.kaggle.com/competitions/nlp-cs-2024-25)
+## Report Link
+
+You can modify the report via the following link : [Overleaf](https://www.overleaf.com/6774245964fmnybgtpggrr#22d75e)
