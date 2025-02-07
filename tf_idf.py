@@ -179,14 +179,13 @@ model = Word2Vec(X_train,min_count=1)
 w2v = dict(zip(model.wv.index_to_key, model.wv.vectors)) 
 modelw = MeanEmbeddingVectorizer(w2v)# converting text to numerical data using Word2Vec
 X_train_vectors_w2v = modelw.transform(X_train_tok)
-X_val_vectors_w2v = modelw.transform(X_test_tok)
+X_test_vectors_w2v = modelw.transform(X_test_tok)
 
 classifier = RandomForestClassifier()
 
 classifier.fit(tfidf_train_vectors, y_train)
 
 y_pred = classifier.predict(tfidf_test_vectors)
-
 
 with open('y_pred_shuffle.txt', 'w') as file:
     for item in y_pred.tolist():
