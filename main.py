@@ -137,7 +137,7 @@ def prepare_data(train_path, test_path):
     print(f"Nombre d'exemples de test: {len(test_df)}")
 
     return (train_texts, val_texts, test_df['combined_text'].values,
-            train_labels, val_labels, labels_to_ids, ids_to_labels)
+            train_labels, val_labels, labels_to_ids, ids_to_labels, test_df)
 
 # Fonction d'entraînement
 def train_epoch(model, data_loader, optimizer, scheduler, device):
@@ -204,13 +204,30 @@ def evaluate(model, data_loader, device):
 
     return None, predictions
 
+# Fonction pour générer un fichier de soumission
+def generate_submission(model, test_dataloader, test_df, ids_to_labels, filename):
+    print(f"Génération des prédictions pour le fichier {filename}...")
+    _, test_predictions = evaluate(model, test_dataloader, device)
+    
+    # Convertir les IDs de prédiction en labels
+    test_pred_labels = [ids_to_labels[pred_id] for pred_id in test_predictions]
+    
+    # Créer le fichier de soumission
+    submission_df = pd.DataFrame({
+        'ID': test_df.index+1,
+        'Label': test_pred_labels
+    })
+    
+    submission_df.to_csv(filename, index=False)
+    print(f"Fichier de soumission '{filename}' créé avec succès.")
+
 # Fonction principale
 def main():
     # Paramètres
     TRAIN_BATCH_SIZE = 16  # Réduit pour Colab
     EVAL_BATCH_SIZE = 16  # Réduit pour Colab
     MAX_LENGTH = 128
-    EPOCHS = 3
+    EPOCHS = 5
     LEARNING_RATE = 2e-5
     WARMUP_STEPS = 0
     MODEL_NAME = "xlm-roberta-base"  # Modèle pré-entraîné multilingue
@@ -220,7 +237,7 @@ def main():
     TEST_PATH = "test.csv"
 
     # Préparer les données
-    train_texts, val_texts, test_texts, train_labels, val_labels, labels_to_ids, ids_to_labels = prepare_data(
+    train_texts, val_texts, test_texts, train_labels, val_labels, labels_to_ids, ids_to_labels, test_df = prepare_data(
         TRAIN_PATH, TEST_PATH
     )
 
@@ -297,7 +314,6 @@ def main():
 
     # Entraînement
     print("Début de l'entraînement...")
-    best_accuracy = 0
 
     for epoch in range(EPOCHS):
         print(f"\nÉpoque {epoch + 1}/{EPOCHS}")
@@ -309,41 +325,22 @@ def main():
         # Évaluation
         val_accuracy, _ = evaluate(model, val_dataloader, device)
         print(f"Précision de validation: {val_accuracy:.4f}")
+        
+        # À la 4ème époque, générer un fichier de soumission intermédiaire (sans sauvegarder le modèle)
+        if epoch == 3:  # index 3 = 4ème époque
+            print(f"Précision de validation à l'époque 4: {val_accuracy:.4f}")
+            
+            # Générer le fichier de soumission pour l'époque 4
+            generate_submission(model, test_dataloader, test_df, ids_to_labels, "submission_epoch4.csv")
 
-        # Conserver uniquement le meilleur modèle
-        if val_accuracy > best_accuracy:
-            best_accuracy = val_accuracy
-            torch.save(model.state_dict(), "best_model.bin")
-            print("Meilleur modèle sauvegardé!")
-
-    # Sauvegarder le modèle final
+    # Sauvegarder uniquement le modèle final (5ème époque)
     print("\nSauvegarde du modèle final...")
-    torch.save({
-        'model_state_dict': model.state_dict(),
-        'optimizer_state_dict': optimizer.state_dict(),
-        'best_accuracy': best_accuracy
-    }, "final_model.pt")
+    torch.save(model.state_dict(), "final_model.bin")
+    print("Modèle final sauvegardé avec succès!")
+    print(f"Précision finale de validation: {val_accuracy:.4f}")
 
-    # Charger le meilleur modèle pour les prédictions
-    print("\nChargement du meilleur modèle pour les prédictions...")
-    model.load_state_dict(torch.load("best_model.bin"))
-
-    # Prédictions sur l'ensemble de test
-    print("Génération des prédictions pour l'ensemble de test...")
-    _, test_predictions = evaluate(model, test_dataloader, device)
-
-    # Convertir les IDs de prédiction en labels
-    test_pred_labels = [ids_to_labels[pred_id] for pred_id in test_predictions]
-
-    # Créer le fichier de soumission
-    test_df = pd.read_csv(TEST_PATH)
-    submission_df = pd.DataFrame({
-        'id': test_df.index,
-        'prediction': test_pred_labels
-    })
-
-    submission_df.to_csv('submission.csv', index=False)
-    print("Fichier de soumission 'submission.csv' créé avec succès.")
+    # Générer le fichier de soumission final
+    generate_submission(model, test_dataloader, test_df, ids_to_labels, "submission_final.csv")
 
 if __name__ == "__main__":
     main()
