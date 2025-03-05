@@ -326,11 +326,9 @@ def main():
         val_accuracy, _ = evaluate(model, val_dataloader, device)
         print(f"Précision de validation: {val_accuracy:.4f}")
         
-        # À la 4ème époque, générer un fichier de soumission intermédiaire (sans sauvegarder le modèle)
-        if epoch == 3:  # index 3 = 4ème époque
+        if epoch == 3:  
             print(f"Précision de validation à l'époque 4: {val_accuracy:.4f}")
             
-            # Générer le fichier de soumission pour l'époque 4
             generate_submission(model, test_dataloader, test_df, ids_to_labels, "submission_epoch4.csv")
 
     # Sauvegarder uniquement le modèle final (5ème époque)
