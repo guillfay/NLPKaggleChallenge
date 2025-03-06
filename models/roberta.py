@@ -200,8 +200,8 @@ def main():
     LEARNING_RATE = 2e-5
     WARMUP_STEPS = 0
     MODEL_NAME = "xlm-roberta-base"  
-    TRAIN_PATH = "../data/train_submission.csv"
-    TEST_PATH = "../data/test_without_labels.csv"
+    TRAIN_PATH = "data/train_submission.csv"
+    TEST_PATH = "data/test_without_labels.csv"
 
     train_texts, val_texts, test_texts, train_labels, val_labels, labels_to_ids, ids_to_labels, test_df = prepare_data(TRAIN_PATH, TEST_PATH)
 

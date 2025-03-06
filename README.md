@@ -2,35 +2,39 @@
 
 ## Competition Link
 
-You can access the competition via the following link : [Kaggle](https://www.kaggle.com/competitions/nlp-cs-2024)
+You can access the competition via the following link : [Kaggle](https://www.kaggle.com/competitions/nlp-cs-2025/overview)
+We are the team named 'meow' 
 
-## Report Link
+## Report 
 
-You can modify the report via the following link : [Overleaf](https://www.overleaf.com/6774245964fmnybgtpggrr#22d75e)
+The report is available in the file `NLP_rapport.pdf` in the root directory.
 
-## Grading Criteria
+## Team Members
 
-Your work will be graded based on the following criteria:
+- Rayane Bouaita 
+- Erwan David
+- Pierre El Anati
+- Guillaume Faynot
+- Gabriel Trier
 
-- Deliverable (15 points): Template is here.
-    - Code (5 points): Your code should be readable, typed, and well-commented. Additionally, your GitHub repository should be organized and easy to navigate.
-    - Report (10 points): Your report should include the following sections:
-        - Abstract (1 point): A brief summary of your work.
-        - Introduction (2 points): An overview of the problem and the relevance of your work.
-        - Solution (3 points): A detailed explanation of your approach and methodology.
-        - Results and Analysis (4 points): A presentation of your results and a thorough analysis of them.
+## Description 
 
-- Kaggle Results (5 points)
-    - The top two teams will receive 5 points.
-     -Teams placing 3rd-4th will receive 4 points.
-    - Teams placing 5th-6th will receive 3 points.
-    - Teams placing 7th-8th will receive 2 points.
-    - Teams placing 9th-10th will receive 1 point.
+Text classification with sparsely represented training data is not a trivial task. We are going to present our solution using large language models (LLMs) to classify texts from almost 390 different languages. After studying the data provided to us, we decided to use different approaches using machine learning models. Our final model achieved an accuracy of 88.0\%, placing our team in the top 10 of the ranking.
 
-**Le temps d'inférence ne doit pas dépasser 1h sur nos machines**
+## Installation
 
-## TODO
-- [] Utiliser ChatGPT pour augmenter les données de train et faire en sorte qu'elles soient classifiées
-- [] Faire un bon split train/test (pour l'instant, `X_test = X_train`)
-- [] Modifier le modèle
-- [] Faire une fonction de scoring (pour ne pas avoir à submit pour évaluer la performance du modèle)
+To install the required packages, you can run the following command:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+To train the model, you can run the following command from the root directory:
+
+```bash
+python models/roberta.py
+```
+
+You can also use the model.ipynb notebook to train the model. 
