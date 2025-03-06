@@ -1,7 +1,0 @@
-Meilleurs hyperparamètres : {'clf__C': 10, 'tfidf__max_features': 100000, 'tfidf__ngram_range': (1, 2)}
-Accuracy sur validation : 0.775854813256181
-
-bert.py --> 
-Résultats sur l'ensemble de validation : {'eval_loss': 0.4813213646411896, 'eval_accuracy': 0.8608364018937401, 'eval_precision': 0.8654711895965098, 
-'eval_recall': 0.8608364018937401, 'eval_f1': 0.8597720998389238, 'eval_runtime': 61.873, 'eval_samples_per_second': 614.484, 
-'eval_steps_per_second': 38.417, 'epoch': 3.0}
